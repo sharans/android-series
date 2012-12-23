@@ -1,28 +1,37 @@
 package tw.workshop.activities;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.InjectView;
 import tw.workshop.R;
 import tw.workshop.adapter.StatusAdapter;
+import tw.workshop.model.Status;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StatusListActivity extends RoboActivity {
 
     private static String TAG = "standup-updates-application";
 
-    StatusAdapter statusAdapter;
-
     @InjectView(R.id.status_list)
-    ListView statusList;
+    ListView statusListView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.status_details);
-        String[] storyList = {"story1", "story2"};
-        statusList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, storyList));
+
+
+        List<Status> statuses = new ArrayList<Status>();
+        statuses.add(new Status("1341", "InProgress"));
+        statuses.add(new Status("1443", "Done"));
+
+        statusListView.setAdapter(new StatusAdapter(this, statuses));
     }
 
 }
