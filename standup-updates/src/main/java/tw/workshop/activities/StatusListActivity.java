@@ -1,10 +1,11 @@
 package tw.workshop.activities;
 
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.InjectView;
 import tw.workshop.R;
@@ -34,5 +35,25 @@ public class StatusListActivity extends RoboActivity {
         statusListView.setAdapter(new StatusAdapter(this, statuses));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.status_row, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        if(itemId == R.id.add){
+            showAddStatus();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showAddStatus() {
+        Toast.makeText(StatusListActivity.this, "Add menu clicked", Toast.LENGTH_LONG).show();
+    }
 }
 
