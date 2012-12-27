@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
+    <RelativeLayout android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/story_number_label"
+                  android:text="Story Number" />
+        <EditText android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/story_number_text"
+                  android:layout_toRightOf="@id/story_number_label"/>
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/story_status_label"
+                  android:text="Story Status" />
+        <EditText android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/story_status_text"
+                  android:layout_toRightOf="@id/story_status_label"/>
+    </RelativeLayout>
+    <Button android:id="@+id/save_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_gravity="center"/>
+</LinearLayout>

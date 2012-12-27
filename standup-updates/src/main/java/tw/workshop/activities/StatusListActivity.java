@@ -1,5 +1,6 @@
 package tw.workshop.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,8 +13,12 @@ import tw.workshop.R;
 import tw.workshop.adapter.StatusAdapter;
 import tw.workshop.model.Status;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static tw.workshop.activities.AddStatusActivity.NEW_STATUS;
+import static tw.workshop.activities.AddStatusActivity.NEW_STATUS_ADDED;
 
 public class StatusListActivity extends RoboActivity {
 
@@ -21,14 +26,14 @@ public class StatusListActivity extends RoboActivity {
 
     @InjectView(R.id.status_list)
     ListView statusListView;
+    private List<Status> statuses;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.status_details);
 
-
-        List<Status> statuses = new ArrayList<Status>();
+        statuses = new ArrayList<Status>();
         statuses.add(new Status("1341", "InProgress"));
         statuses.add(new Status("1443", "Done"));
 
@@ -53,7 +58,17 @@ public class StatusListActivity extends RoboActivity {
     }
 
     private void showAddStatus() {
-        Toast.makeText(StatusListActivity.this, "Add menu clicked", Toast.LENGTH_LONG).show();
+        Intent addStatusIntent = new Intent(StatusListActivity.this, AddStatusActivity.class);
+        startActivityForResult(addStatusIntent, NEW_STATUS_ADDED);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if( requestCode == NEW_STATUS_ADDED) {
+            Status status = (Status) data.getExtras().getSerializable(NEW_STATUS);
+            statuses.add(status);
+        }
+    }
+
 }
 

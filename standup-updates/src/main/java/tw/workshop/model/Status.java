@@ -1,6 +1,8 @@
 package tw.workshop.model;
 
-public class Status {
+import java.io.Serializable;
+
+public class Status implements Serializable {
     private String storyNumber;
     private String storyStatus;
 
