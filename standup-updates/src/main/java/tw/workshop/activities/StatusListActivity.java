@@ -43,7 +43,7 @@ public class StatusListActivity extends RoboActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.status_row, menu);
+        inflater.inflate(R.menu.add_status, menu);
         return true;
     }
 
