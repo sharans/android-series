@@ -11,6 +11,7 @@ import roboguice.activity.RoboActivity;
 import roboguice.inject.InjectView;
 import tw.workshop.R;
 import tw.workshop.adapter.StatusAdapter;
+import tw.workshop.datastore.StatusDataStore;
 import tw.workshop.model.Status;
 
 import java.io.Serializable;
@@ -25,7 +26,8 @@ public class StatusListActivity extends RoboActivity {
     private static String TAG = "standup-updates-application";
 
     @InjectView(R.id.status_list)
-    ListView statusListView;
+    private ListView statusListView;
+    private StatusDataStore statusDataStore;
     private List<Status> statuses;
 
     @Override
@@ -37,6 +39,7 @@ public class StatusListActivity extends RoboActivity {
         statuses.add(new Status("1341", "InProgress"));
         statuses.add(new Status("1443", "Done"));
 
+        statusDataStore = new StatusDataStore(this);
         statusListView.setAdapter(new StatusAdapter(this, statuses));
     }
 
@@ -66,7 +69,7 @@ public class StatusListActivity extends RoboActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if( requestCode == NEW_STATUS_ADDED) {
             Status status = (Status) data.getExtras().getSerializable(NEW_STATUS);
-            statuses.add(status);
+            statusDataStore.save(status);
         }
     }
 
